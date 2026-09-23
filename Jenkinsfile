@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16'
-            args '-u root'
-        }
-    }
+    agent any
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
@@ -13,18 +8,36 @@ pipeline {
 
     stages {
         stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'node:16-slim'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'npm ci'
             }
         }
 
         stage('Unit Tests') {
+            agent {
+                docker {
+                    image 'node:16-slim'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'npm test'
             }
         }
 
         stage('Security Scan') {
+            agent {
+                docker {
+                    image 'node:16-slim'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'npm audit --audit-level=high'
             }

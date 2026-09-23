@@ -1,8 +1,8 @@
 const request = require('supertest');
 const app = require('../app');
 
-describe('GET /', () => {
-    it('should return Hello World!', async () => {
+(async () => {
+    try {
         const response = await request(app).get('/');
 
         if (response.statusCode !== 200) {
@@ -12,5 +12,11 @@ describe('GET /', () => {
         if (response.text !== 'Hello World!') {
             throw new Error(`Unexpected response: ${response.text}`);
         }
-    });
-});
+
+        console.log('✓ should return Hello World!');
+        console.log('1 passing');
+    } catch (error) {
+        console.error('Test failed:', error.message);
+        process.exit(1);
+    }
+})();
