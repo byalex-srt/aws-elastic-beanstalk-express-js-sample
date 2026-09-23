@@ -49,12 +49,24 @@ pipeline {
             }
         }
 
-        stage('Docker Push') {
-            steps {
-                echo 'Docker registry push will be configured with Jenkins credentials.'
-            }
+    stage('Docker Push') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub-credentials',
+            usernameVariable: 'DOCKERHUB_USERNAME',
+            passwordVariable: 'DOCKERHUB_TOKEN'
+        )]) {
+            sh '''
+                echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                docker tag aws-express-app:${BUILD_NUMBER} $DOCKERHUB_USERNAME/aws-express-app:${BUILD_NUMBER}
+                docker tag aws-express-app:${BUILD_NUMBER} $DOCKERHUB_USERNAME/aws-express-app:latest
+                docker push $DOCKERHUB_USERNAME/aws-express-app:${BUILD_NUMBER}
+                docker push $DOCKERHUB_USERNAME/aws-express-app:latest
+                docker logout
+            '''
         }
     }
+}
 
     post {
         always {
