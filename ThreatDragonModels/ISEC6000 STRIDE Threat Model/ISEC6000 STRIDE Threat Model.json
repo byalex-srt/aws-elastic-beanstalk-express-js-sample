@@ -1,0 +1,29 @@
+{
+  "version": "2.6.2",
+  "release_version": "1.0",
+  "released_at": "2026-09-23",
+  "summary": {
+    "title": "ISEC6000 STRIDE Threat Model",
+    "owner": "alex Sarti",
+    "description": "Threat model for a web application composed of a User Interface, Web Application, and Database. The model uses STRIDE to identify potential security threats and propose mitigation strategies.",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "Web Application STRIDE",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.6.2",
+        "cells": [],
+        "description": "STRIDE threat model for User Interface, Web Application and Database components."
+      }
+    ],
+    "diagramTop": 1,
+    "reviewer": "",
+    "threatTop": 0
+  }
+}
